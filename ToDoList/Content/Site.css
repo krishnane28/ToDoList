@@ -1,0 +1,64 @@
+﻿/* Login Form */
+.login-form {
+    /* Margin property specifies the space around its elements 
+       Centering a block - make the block a fixed size otherwise
+       if it changes centering will not work
+       Then make the margin-left and margin-right property to auto
+       Relative positioning - make the element to be positioned in relation to its 
+       normal position i.e. away from where it is previously positioned without disturbing
+       other elements
+       Absolute positioning - position the element in relation to its parent element
+       transform - used to rotate, scale, move etc. elements
+    */
+    width: 340px;
+    margin: 50px auto;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Header  */
+header {
+    background: #3e4249;
+    color: #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #080808;
+}
+
+.header-title {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* List Group */
+.list-group-item:hover {
+    background: #eee;
+    /*cursor: pointer;*/
+
+}
+
+.list-group-item:hover .list-buttons {
+    display: block;
+}
+
+.list-group-item-heading {
+    font-size: 150%;
+}
+
+.list-group-item-text {
+    color: #999;
+}
+
+.list-buttons {
+    position: absolute;
+    margin-top: 0px;
+    top: 10px;
+    right: 10px;
+    display: none;
+}
+
+.panel-footer {
+    background-color: #eee;
+}

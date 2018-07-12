@@ -1,0 +1,108 @@
+﻿@model IEnumerable<ToDoList.Models.ToDoModel>
+
+
+
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <h1 class="header-title">Todo List</h1>
+                </div>
+                <div class="pull-right" style="margin: 20px 0 10px;">
+                    <!-- Create New Task Modal Trigger Button -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTaskModal">
+                        Create New Task
+                    </button>
+                    <!-- Create New Task Modal Trigger Button -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header -->
+
+<!-- TODO List Panel -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- Panel - A bordered box with some padding around its content -->
+            <div id="taskPanel" class="panel panel-default">
+                <div class="panel-heading"></div>
+                <div id="taskPanelBody" class="panel-body">
+                    @if (Model == null)
+                    {
+                        <h1 id="emptyMessage">You have no tasks left to do</h1>
+                    }
+                    else
+                    {
+                        foreach (var each_task in Model)
+                        {
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    @if (each_task.IsDone)
+                                    {
+                                        <h4 id="heading_@each_task.ID" class="list-group-item-heading" style="text-decoration: line-through;">@each_task.TaskName</h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 id="heading_@each_task.ID" class="list-group-item-heading">@each_task.TaskName</h4>
+                                    }
+                                    <p class="list-group-item-text">@each_task.TaskDescription</p>
+                                    <div class="list-buttons">
+                                        @if (each_task.IsDone)
+                                        {
+                                            <button id="@each_task.ID" class="btn btn-info btn-xs" style="display: none;">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button id="@each_task.ID" class="btn btn-info btn-xs">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </button>
+                                        }
+                                    </div>
+                                </li>
+                            </ul>
+                        }
+                    }
+                </div>      
+                <div class="panel-footer">
+                    <!--<small>Total Tasks</small>-->
+                </div>
+            </div>
+        </div>
+        <!-- Create New Task Modal -->
+        <div id="newTaskModal" class="modal fade" role="dialog">
+           <!-- This will be generated using AJAX call -->
+        </div>
+        <!-- Create New Task Modal -->
+    </div>
+</div>
+<!-- TODO List Panel -->
+
+@section ToDoAppScript 
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/Site.js"></script>
+    <script>
+        $("#logoffLink").css("display", "block");
+        $("#loginLink").css("display", "none");
+        $("button.btn.btn-info.btn-xs").click(function () {
+            var clickedButton = $(this);
+            var id = clickedButton.attr("id");
+            var headingID = "#heading_" + id;
+            $.ajax({
+                url: "/ToDos/MarkAsCompleted",
+                type: "POST",
+                data: { ID: parseInt(id) },
+                success: function (result) {
+                    $(headingID).css("text-decoration", "line-through");
+                    clickedButton.css("display", "none");
+                }
+            });
+        });
+    </script>
+}

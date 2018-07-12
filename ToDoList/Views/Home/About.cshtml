@@ -1,0 +1,67 @@
+﻿<!-- Jumbotron -->
+<div class="jumbotron">
+    <h1>TODO LIST Application</h1>
+    <p>
+        TODO list application maintains a list of tasks that one needs or intends to accomplish
+    </p>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4">
+        <h2>Create Tasks</h2>
+        <p>
+            TODO List application allows the user to create a task that the user needs or intends to accomplish.
+        </p>
+        @Html.ActionLink("Create Task", "Details", "ToDos", null, new
+        {
+            @class = "btn btn-primary"
+        })
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4">
+        <h2>View Tasks</h2>
+        <p>
+            TODO List application allows to view the list of tasks associated with the user.
+        </p>
+        @Html.ActionLink("View Tasks", "Details", "ToDos", null, new
+        {
+            @class = "btn btn-primary"
+        })
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4">
+        <h2>Mark the task as completed</h2>
+        <p>
+            TODO List application allows the user to mark the task as completed in his list.
+        </p>
+        @Html.ActionLink("Mark Task", "Details", "ToDos", null, new
+        {
+            @class = "btn btn-primary"
+        })
+    </div>
+</div>
+<!-- Jumbotron -->
+
+@try
+{
+    if(ViewBag.loggedIn == 1)
+    {
+        @section ToggleLoginLink
+        { 
+            <script type="text/javascript">
+                $("#loginLink").css("display", "none");
+                $("#logoffLink").css("display", "block");
+            </script>
+        }
+    }
+    else
+    {
+        @section ToggleLoginLink
+        {
+            <script type="text/javascript">
+                $("#loginLink").css("display", "block");
+            </script>       
+        }
+    }
+}
+catch
+{
+    // Do nothing
+}

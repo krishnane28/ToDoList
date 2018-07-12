@@ -1,0 +1,47 @@
+﻿@model ToDoList.Models.LoginModel
+
+<div class="login-form">
+    <div class="form-group">
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            <!-- Prevent Cross Site Request Forgery -->
+            @Html.AntiForgeryToken()
+            <h2 class="text-center">Log in</h2>
+            <div class="form-group">                 
+                @Html.DisplayNameFor(loginModel => loginModel.Username)
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                @Html.TextBoxFor(loginModel => loginModel.Username, new {
+                                                                            @class = "form-control",
+                                                                            placeholder = "Username"
+                                                                        })               
+                @Html.ValidationMessageFor(loginModel => loginModel.Username)
+            </div>
+            <div class="form-group">               
+                @Html.DisplayNameFor(loginModel => loginModel.Password)
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                @Html.PasswordFor(loginModel => loginModel.Password, new {
+                                                                            @class = "form-control",
+                                                                            placeholder = "Password"
+                                                                          })
+                
+                @Html.ValidationMessageFor(loginModel => loginModel.Password)
+            </div>
+            <div class="form-group">
+                <input type="submit" id="btnLogin" name="btnLogin" class="btn btn-primary btn-block" value="Login" />
+                <label>@ViewBag.Message</label>
+            </div>
+        }
+    </div>
+</div>
+
+@section ToggleLoginLinkFromLoginPage
+{
+    <script type="text/javascript">
+        $("#loginLink").css("display", "none");
+    </script>
+}
+
+
+
+
+
